@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh"><!-- InstanceBegin template="/Templates/Head.dwt" codeOutsideHTMLIsLocked="false" -->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- InstanceBeginEditable name="doctitle" -->
+    <title>商品管理-后台管理</title>
+    <!-- InstanceEndEditable -->
+    <link href="{$smarty.const.ADMIN_CSS_URL1}bootstrap.min.css" rel="stylesheet">
+    <link href="{$smarty.const.ADMIN_CSS_URL1}navbar-fixed-top.css" rel="stylesheet">
+	<link href="{$smarty.const.CSS_URL1}public.css" rel="stylesheet" type="text/css" >
+	<link rel="icon" href="{$smarty.const.IMG_URL1}icon.ico" type="image/x-icon">
+	
+	<style type="text/css">
+		table{
+            width: 100%;  
+            table-layout: fixed; 
+        }
+        .th01{
+            width: 50%;
+        }
+		.th02{
+            width: 70%;
+        }
+        td{ 
+            white-space: nowrap;/*控制单行显示*/
+            overflow: hidden;/*超出隐藏*/   
+            text-overflow: ellipsis;/*隐藏的字符用省略号表示*/  
+        }   
+  </style>
+  <!-- InstanceBeginEditable name="head" -->
+  <!-- InstanceEndEditable -->
+  </head>
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{$smarty.const.__MODULE__}/Index/index/aid/{session('admin_id')}"><b>家用电器销售商城管理后台</b></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+		{if (!empty(session('admin_id')) and !empty(session('admin_name')))}
+          <ul class="nav navbar-nav">
+            <li><a href="{$smarty.const.__MODULE__}/Index/index/aid/{session('admin_id')}">首页</a></li>
+            <li><a href="{$smarty.const.__MODULE__}/Goods/goods_list/aid/{session('admin_id')}">商品管理</a></li>
+            <li><a href="{$smarty.const.__MODULE__}/Goods/goods_type/aid/{session('admin_id')}">商品类型</a></li>
+			<li><a href="{$smarty.const.__MODULE__}/Goods/rb/aid/{session('admin_id')}">商品回收站</a></li>
+			<li><a href="{$smarty.const.__MODULE__}/Goods/order_list/aid/{session('admin_id')}">订单管理</a></li>
+            <li><a href="{$smarty.const.__MODULE__}/Users/users_list/aid/{session('admin_id')}">用户管理</a></li>
+            <li><a href="{$smarty.const.__MODULE__}/Set/settings/aid/{session('admin_id')}">网站设置</a></li>			
+          </ul>
+
+			<div style="height: 15px;margin-top: 15px;float: left"><font id="time" style="text-align: center;"></font></div>
+				<script type="text/javascript">
+				function now(){
+				var myDate = new Date();
+				var myWeek = new Array(6);
+				myWeek[0] = "星期日";
+				myWeek[1] = "星期一";
+				myWeek[2] = "星期二";
+				myWeek[3] = "星期三";
+				myWeek[4] = "星期四";
+				myWeek[5] = "星期五";
+				myWeek[6] = "星期六"; 
+				var nowTime ="<span>" + myDate.getFullYear() + "/" + (myDate.getMonth() + 1) + "/" + myDate.getDate() + "/"  + myWeek[ myDate.getDay()] + "&nbsp;" + myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + "</span>";
+				document.getElementById("time").innerHTML = nowTime;
+				}
+				setInterval("now()",1000);
+				</script>		
+		
+          <ul class="nav navbar-nav navbar-right">
+			<li class="active"><a href="javascript:jump('{$smarty.const.__MODULE__}/Index/logout')">退出</a></li>
+			  <li>&nbsp;</li>
+            <li class="active"><a href="{U('Home/Index/index')}" target="_blank">进入前台 <span class="sr-only">(current)</span></a></li>
+          </ul>
+		  
+			<script>
+				function jump($str){
+    				if(confirm("确定退出吗？")){
+        				window.location =$str
+    				}
+				}
+			</script>
+			
+		{/if}
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class="container">
+		
+		<!-- InstanceBeginEditable name="center" -->
+		
+		     <div class="jumbotron">
+        <h2>商品管理</h2>
+        <p>功能说明：对商品进行增删改查</p>
+      </div>
+
+
+                <table class="table table-striped">
+
+        <a href="{$smarty.const.__CONTROLLER__}/goods_add/aid/{session('admin_id')}" class="btn btn-success">增加商品</a>
+        <thead>
+          <tr>
+            <th class="th01">商品编号</th>
+            <th class="th01">商品名称</th>
+            <th class="th01">商品类型</th>
+            <th class="th01">商品状态</th>
+            <th class="th01">库存</th>
+            <th class="th01">现价</th>
+            <th class="th01">原价</th>
+            <th class="th01">首页显示</th>
+            <th class="th01">商品例图</th>
+            <th class="th01">商品描述</th>
+            <th class="th01">添加日期</th>
+            <th class="th01">最近操作</th>
+            <th style=" width: 215px;text-align: center">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+    {foreach $info as $k => $v}<tr>
+      <td>{$v.goods_id}</td>
+      <td>{$v.goods_name}</td>
+      <td>{$v.goods_type}</td>
+      <td>{$v.status}</td>
+      <td>{$v.num}</td>
+      <td>{$v.goods_price}</td>
+      <td>{$v.goods_old_price}</td>
+      <td>{$v.view_index}</td>
+      <td>
+          {if (!empty($v.goods_small_pic))}
+          <img src="{$v.goods_small_pic}" width="60px" height="60px">
+          {/if}
+          {if (empty($v.goods_small_pic))}
+          <img src="{$smarty.const.IMG_URL1}Null_pic.png" width="60px" height="60px">
+          {/if}
+      </td>
+      <td>{$v.goods_description}</td>
+      <td>{$v.join_date}</td>
+      <td>{$v.c}</td>
+      <td>
+        <a href="{$smarty.const.__CONTROLLER__}/goods_edit/goods_id/{$v.goods_id}/aid/{session('admin_id')}" class="btn btn-primary">编辑</a>
+        <a href="{$smarty.const.__CONTROLLER__}/goods_rb/goods_id/{$v.goods_id}/aid/{session('admin_id')}" class="btn btn-primary">放回收站</a>
+        <a  class="btn btn-danger" href="javascript:jump('{$smarty.const.__CONTROLLER__}/goods_del/goods_id/{$v.goods_id}/aid/{session('admin_id')}')">删除</a>
+        </div>
+
+      </td>
+    </tr>{/foreach}
+<tr><td>页码：</td><td colspan="12" style="text-align: center;font-size: 16px">{$page}</td></tr>
+    </tbody>
+  </table>
+<script>
+function jump($str){
+    if(confirm("确定继续吗？")){
+        window.location =$str
+    }
+}
+</script>
+
+
+		
+		<!-- InstanceEndEditable -->
+
+    </div> 
+    <!-- /container -->
+</body>
+<!-- InstanceEnd --></html>

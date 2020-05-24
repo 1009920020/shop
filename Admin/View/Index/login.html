@@ -1,0 +1,68 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>管理员登录</title>
+  <link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}general.css">
+  <link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}login.css">
+  <link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}public.css">
+  <script type="text/javascript" src="{$smarty.const.JS_URL1}jquery.js"></script>
+  <script type="text/javascript" src="{$smarty.const.JS_URL1}general.js"></script>
+  <style>
+
+      
+  </style>
+</head>
+<body>
+<!-- 主体开始 -->
+<div class="container w900 mt20">
+  <div class="wbox cut">
+    <div class="login-banner fl cut"></div>
+      <div class="login ml530">
+        <h2 class="c666">管理员登录</h2>
+        
+		<div class="box01">
+			<form name="admin_login" method="post" enctype="multipart/form-data" action="{$smarty.const.__MODULE__}/Index/index">
+				<ul>
+					<li>
+						<div class="null01"></div>
+						<div class="regdiv" style="background: url({$smarty.const.IMG_URL1}user.png) no-repeat 0 center;background-size: 50px;">
+							<input name="uname" type="text" placeholder="管理员账号"/>
+						</div>
+						<div class="regdiv mt18" style="background: url({$smarty.const.IMG_URL1}pwd.png) no-repeat 0 center;background-size: 50px;">
+							<input name="pwd" type="password" placeholder="管理员密码"/>
+						</div>
+					</li>					
+					<li class="fl">
+						<div class="yz1div fl" style="background: url({$smarty.const.IMG_URL1}yz.png) no-repeat 0 center;background-size: 50px;">
+							<input name="captcha" type="text" placeholder="验证码"/>
+						</div>
+						<div class="yz2div fr">
+							<img src="{$smarty.const.__CONTROLLER__}/verifyImg"  onclick="this.src='{$smarty.const.__CONTROLLER__}/verifyImg/'+Math.random() " alt="" />
+						</div>
+					</li>
+					<div class="null01"></div>
+					
+					<div class="clear"></div>					
+				</ul>
+				<input class="regbutton" type="submit" value="登录"/>
+				
+			</form>
+			
+		</div>
+      </div>
+  </div>
+</div>
+<!-- 主体结束 -->
+<div class="cl"></div>
+<!-- 页脚开始 -->
+<div class="footer mt20">
+  <div class="links radius4 mt20">
+
+      </div>
+
+</div><!-- 页脚结束 -->
+
+
+
+</body></html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html><!-- InstanceBegin template="/Templates/home.dwt" codeOutsideHTMLIsLocked="false" -->
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<!-- InstanceBeginEditable name="doctitle" -->
+		<title>修改密码 - 家用电器销售商城</title>
+		<!-- InstanceEndEditable -->
+		<link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}public.css">    
+		<link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}general.css">
+		<link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}index.css">
+	   <link rel="stylesheet" type="text/css" href="{$smarty.const.CSS_URL1}goods.css">
+		<link rel="icon" href="{$smarty.const.IMG_URL1}icon.ico" type="image/x-icon">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- InstanceBeginEditable name="head" -->
+    <!-- InstanceEndEditable -->
+	</head>
+	<body>
+<div style=" min-width: 1700px;">
+	<div style="height: 20px;background: #FFFFFF"></div>
+		<div class="top01">					
+
+        <!-- 头部主体开始 -->
+        <div class="module cut" style="width: 75%;margin-left: 8%">
+            <div class="logo fl"><a ><a href="{$smarty.const.__SELF__}"><img alt="" src="{$smarty.const.IMG_URL1}logo.png" border="0"></a></div>
+            <!-- 头部搜索开始 -->
+            <div class="top-search fl">
+                <form method="post" action="{$smarty.const.__MODULE__}/Goods/goods_list/uid/{session('uid')}">
+                    <div class="sf cut">
+                        <input class="fl" name="kw" type="text" value="" placeholder="搜索您想要的商品，输入的名称越短搜索得越多">
+                        <button class="fr" type="submit">搜 索</button>
+                    </div>
+                </form>
+
+            </div>
+            <!-- 头部搜索结束 -->
+            <!-- 头部购物车开始 -->
+            <!--网络时间-->
+            <!--<div style="margin-right: 20;text-align: right">{*session('p_time')*}</div>-->
+            <!--本地时间-->
+            <div id="time"  style="margin-right: 20;text-align: right; height: 20px"></div>
+            <script type="text/javascript">
+            function now(){
+            var myDate = new Date();
+            var myWeek = new Array(6);
+            myWeek[0] = "星期日";
+            myWeek[1] = "星期一";
+            myWeek[2] = "星期二";
+            myWeek[3] = "星期三";
+            myWeek[4] = "星期四";
+            myWeek[5] = "星期五";
+            myWeek[6] = "星期六"; 
+            var nowTime ="<span>" + myDate.getFullYear() + "年" + (myDate.getMonth() + 1) + "月" + myDate.getDate() + "日"  + " " + myWeek[ myDate.getDay()] + " " + myDate.getHours() + ":" + myDate.getMinutes() + ":" + myDate.getSeconds() + "</span>";
+            document.getElementById("time").innerHTML = nowTime;
+            }
+            setInterval("now()",1000);
+            </script>
+            
+            <div class="top-cart fr">
+                <div class="radius4 mt10">
+                    {if (!empty(session('uid')))}
+                    <form method="post" action="{$smarty.const.__MODULE__}/user/cart/uid/{session('uid')}" id="tocart">
+                    <input type="hidden" name="tocart" value='true'>
+                    <a href="{$smarty.const.__MODULE__}/user/center/uid/{session('uid')}">{session('uname')}，欢迎您！</a>&nbsp;
+                    <i class=""><img src="{$smarty.const.IMG_URL1}cart.gif" style="width: 20px"> </i>
+                    <input type="submit" value="我的购物车">
+                    </form>
+                    {/if}
+                </div>
+            </div>
+            <!-- 头部购物车结束 -->
+</div>
+
+        </div>
+        <!-- 头部主体结束 -->
+        
+        <div class="nav-bar" style="">
+            <div class="nav-content">
+                <ul class="main-nav" >{$type = session('goodstypelist')}
+                    <li class="parent global-btn">
+                        <a href="{$smarty.const.__MODULE__}/Goods/goods_list/uid/{session('uid')}"  style=" width: 100px; text-align: center;background:#8B5A2B">
+                            <b>全部商品分类</b></a>
+                        
+                        <ul class="level-2">   {foreach $type as $k => $v}                         
+                            <li><a href="{$smarty.const.__CONTROLLER__}/goods_list/type/{$type[$k]['typename']}"  style=" width: 100px; text-align: center">{$type[$k]['typename']}</a>
+                       {/foreach} </ul>
+                        
+                    </li>
+                    {if (!empty({session('uid')}))}
+                            <li><a href="{$smarty.const.__MODULE__}/index/index/uid/{session('uid')}">首页</a></li>
+                            <li><a href="{$smarty.const.__MODULE__}/user/center/uid/{session('uid')}">用户中心</a></li>
+                            <li><a href="{$smarty.const.__MODULE__}/user/logout/uid/{session('uid')}">退出</a></li>                            
+                        {/if}
+                        {if (empty({session('uid')}))}
+                            <li><a href="{$smarty.const.__MODULE__}/index/index">首页</a></li>
+                            <li><a href="{$smarty.const.__MODULE__}/user/login">登录</a></li>
+                            <li><a href="{$smarty.const.__MODULE__}/user/regist">注册</a></li>
+                        {/if}
+                </ul>
+            </div>
+
+
+
+<!--主体部分-->
+		<div class="box">
+			<font  style="color: #000000">
+			
+			
+			<!-- InstanceBeginEditable name="homecenter" -->
+			
+<div class="container w900 mt20">
+	<span>
+                <span style="float: left;font-size: 16px">当前位置是：个人中心-》修改密码/密保</span>
+            </span>
+            <span style="float:right;margin-right: 8px;font-weight: bold">
+                    【 <a style="text-decoration: none" href="{$smarty.const.__MODULE__}/user/center/uid/{session('uid')}">返回个人中心</a> 】
+                </span>
+  <div class="wbox cut">
+    <div class="login-banner fl cut"></div>
+      <div class="login ml530">
+        <span style=" color: red; font-size: 16px">{foreach $tishi as $k => $v}{$v}{/foreach}</span>
+
+<div class="box01">
+    {if (!empty($errorinfo))}
+        <form method="post" action="{$smarty.const.__CONTROLLER__}/editpwd/uid/{$v.id}" enctype="multipart/form-data">
+        {foreach $userinfo as $k => $v}
+        <ul>
+            <li>
+            <div class="null01"></div>            
+            <div class="regdiv" style="background: url({$smarty.const.IMG_URL1}pwd.png) no-repeat 0 center;background-size: 50px;">
+                    <input name="pwd" type="password" placeholder="密码"/>
+            </div><span class="span01">{$errorinfo.pwd|default:""}</span>
+            <div class="regdiv" style="background: url({$smarty.const.IMG_URL1}pwd.png) no-repeat 0 center;background-size: 50px;">
+                    <input name="repwd" type="password" placeholder="确认密码"/>
+            </div><span class="span01">{$errorinfo.repwd|default:""}</span>
+            <div class="regdiv" style="background: url({$smarty.const.IMG_URL1}yz.png) no-repeat 0 center;background-size: 50px;">
+                    <input name="mbda" type="password" placeholder="密保答案"/>
+            </div><span class="span01">{$errorinfo.mbda|default:""}</span><br/><br/>
+        </ul>
+            <input class="regbutton" type="submit" value="修改密码"/><br/>
+        {/foreach}
+        </form>
+    {/if}
+    
+    {if (empty($errorinfo))}
+        <form method="post" action="{$smarty.const.__CONTROLLER__}/doeditpwd/uid/{$v.id}" enctype="multipart/form-data">
+        {foreach $userinfo as $k => $v}
+        <ul>
+            <li>
+            <div class="null01"></div>            
+            <li class="fl">
+                <div class="yz1div fl" style="background: url({$smarty.const.IMG_URL1}yz.png) no-repeat 0 center;background-size: 50px;">
+                    <input name="captcha" type="text" placeholder="验证码"/>
+                </div>
+                <div class="yz2div fr">
+                    <img src="{$smarty.const.__CONTROLLER__}/verifyImg"  onclick="this.src='{$smarty.const.__CONTROLLER__}/verifyImg/'+Math.random() " alt="" />
+                </div>
+            </li>
+        </ul>
+            <input class="regbutton" type="submit" value="确认修改"/><br/>
+        {/foreach}
+        </form>
+    {/if}
+
+</div>
+      </div>
+  </div>
+</div>
+			
+			
+			
+			<!-- InstanceEndEditable -->
+			
+	<div style="width: 95%">
+				<table style="width: 100%; text-align: center">
+					<tr style="height: 10px"></tr>
+					<tr>
+					<td><a href="javascript:history.go(-1)" ><button οnclick="history.go(-1)" style="width: 100px;height: 30px;">返回上一页</button></a></td>
+		</tr><tr style="height: 10px"></tr>
+		</table>
+		
+		</div>	
+			</font>
+		</div>
+		<div style="clear: both"></div>	
+		<div class="bottom01">
+		  <table width="100%"  height="100%" border="0" style="align-content: center">
+		    <tbody>
+		      <tr>
+		        <td><a href="{U('Admin/Index/index')}"  target="_blank" style="font-size: 16px; color: #000000;">后台管理</a></td>
+	          </tr>
+	        </tbody>
+	      </table>
+    </div></div>
+	</body>
+<!-- InstanceEnd --></html>
